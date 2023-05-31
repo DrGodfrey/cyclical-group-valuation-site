@@ -1,0 +1,38 @@
+{% load static %}
+
+<li class="meetup-item">
+    <article>
+        <div class="meetup-summary">
+            <div class="meetup-details">
+                <h4>{{ title }}</h3>
+                <table>
+                    <tr>
+                        <th rowspan="2">Outsider Owned Shares</th>
+                        <th>% Of total shares</th>
+                        <th>Adj. Market cap</th>
+                    </tr>
+                    <tr>
+                        <td>{{company.outside_shares}}</td>
+                        <td>{{ company.market_cap_of_outside_shares }}</td>
+                    </tr>
+                    <tr class="border-top">
+                        <th rowspan="2">Economic Ownership</th>
+                        <th>% Of group assets</th>
+                        <th>Share of Assets</th>
+                    </tr>
+                    <tr>
+                        <td>{{company.economic_ownership_percentage}}</td>
+                        <td>{{company.value_of_economic_ownership}}</td>
+                    </tr>
+                    <tr class="border-top">
+                        <th colspan="2">Discount</th>
+                        <td>{{ company.discount }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="meetup-actions">
+            <a href="" class="btn">More Details</a>
+        </div> -->
+    </article>
+</li>

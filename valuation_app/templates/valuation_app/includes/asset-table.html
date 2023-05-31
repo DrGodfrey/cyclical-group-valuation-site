@@ -1,0 +1,13 @@
+{% if asset.ownership_percentage == '100%' %}
+<tr>
+    <th>{{asset.name}}</th>
+    <td>-</td>
+    <td>{{asset.value}}</td>
+</tr>
+{% else %}
+<tr>
+    <th>{{asset.name}}</th>
+    <td>{{asset.ownership_percentage}}</td>
+    <td>{{asset.value}}</td>
+</tr>
+{% endif %}

@@ -1,0 +1,40 @@
+{% load static %}
+
+<li class="meetup-item">
+    <article>
+        <div class="meetup-summary">
+            <div class="meetup-details">
+                <h4>{{ title }}</h3>
+                <p>{{company.cross_holding_description}}</p>
+                <table>
+                    <tr>
+                        <th>Market cap</th>
+                        <td colspan="2">{{ company.currency }}{{company.market_cap}}</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <th>Shareprice</th>
+                        <td colspan="2">{{ company.currency }}{{ company.share_price }}</td>
+                    <tr class="blank_row">
+                        <td colspan="3"></td>
+                    </tr>                       
+                    </tr>
+                    <tr class="border-bottom">
+                        <th>Assets</th>
+                        <th>Stake</th>
+                        <th>Value</th>
+                    </tr>
+                    {% for asset in company.assets %}
+                        {% include 'valuation_app/includes/asset-table.html'%}
+                    {% endfor %}
+                    <tr class="border-top">
+                        <th colspan="2">Total value of directly held assets:</th>
+                        <td>{{company.value}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="meetup-actions">
+            <a href="" class="btn">More Details</a>
+        </div> -->
+    </article>
+</li>

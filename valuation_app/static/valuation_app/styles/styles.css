@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Slab:wght@700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: white;
+  color: #537188;
+  min-height: 97vh;
+}
+
+h1,
+h2 {color: #CBB279}
+h3, h4 {
+  font-size: 1.5rem;
+  font-family: 'Roboto Slab', sans-serif;
+  color: black;
+}
+h4 {
+  font-size: 1.3rem;
+}
+
+main {
+  min-height: 68vh;
+}
+
+button,
+.btn {
+  cursor: pointer;
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  background-color: #350490;
+  border: 1px solid #350490;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #230161;
+  border-color: #230161;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+}
+
+/* Table CSS */
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(238, 238, 238);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  min-width: 20vw;
+}
+
+td, th {
+  max-width: 14rem;
+}
+
+td, th {
+  border: 1px solid rgb(225, 212, 187);
+  padding: 10px 20px;
+  text-align: center;
+}
+
+th {
+  background-color: rgb(210, 179, 122);
+}
+
+.border-top td, .border-top th {
+  border-top: 2px solid rgb(238, 238, 238);
+}
+
+.border-bottom td, .border-bottom th {
+  border-bottom: 2px solid rgb(238, 238, 238);
+}
+
+.blank_row {
+    height: 5px !important; /* overwrites any other rules */
+    background-color: #CBB279;
+  }
+
+#main-header {
+    width: 100%;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+#main-header h1 {
+    font-size: 1.45rem;
+}
+
+#main-logo {
+    font-size: 2.3rem;
+    font-family: 'Roboto Slab', sans-serif;
+    text-decoration: none;
+    color: #537188;
+    font-weight: bold;
+}
+

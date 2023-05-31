@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'valuation_app/styles/styles.css' %}">
+    {% block site_css %}{% endblock %}
+</head>
+<body>
+    <header id="main-header">
+        <nav><a href="/meetups" id="main-logo">Cyclical Ownership Calculator</a></nav>
+        <h1>{% block main_heading %}{% endblock %}</h1>
+        {% block header_content %}{% endblock %}
+    </header>
+    <main>
+        {% block body %}{% endblock%}
+    </main>
+    <footer>
+        <p>© Robert Godfrey - 2023</p>  
+        <p><b>Disclaimer:</b></p>
+        <p>The information contained on this Website, the code used in this website, and the numbers used in this website
+            and code-base shall not be understood or construed as, financial advice. I am not an
+            attorney, accountant or financial advisor, nor am I holding myself out to be, and the information
+            contained on this Website is not a substitute for financial advice from a professional who is aware of
+            the facts and circumstances of your individual situation.</p>
+
+        <p>The numbers used in this code are my personal, crude, back of the envelope estimates at the time of coding
+        and I provide no warranty to their accuracy - they were not precise at the time and they will have changed
+        by the time you view this site. I provide no warranty for their accuracy whatsoever. The logic I have used hasn't been verified by anyone independent, and while I believe it may have some merit, it is inherently experimental and should not be relied upon without
+        independent verification.</p>
+            
+        <p>I Regardless of anything to the
+        contrary, nothing available on or through this Website should be understood as a recommendation
+        that you should not consult with a financial professional to address your particular information. I expressly recommends that you seek advice from a professional.</p>      
+    </footer>
+</body>
+</html>

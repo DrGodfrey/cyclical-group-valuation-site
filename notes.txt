@@ -1,0 +1,33 @@
+# run python server
+-------------------
+python manage.py runserver
+
+
+# create database:
+-------------------
+python manage.py makemigrations
+
+python manage.py migrate
+
+
+# create user through server:
+-----------------------------
+python manage.py createsuperuser
+
+
+
+Django @classmethod
+https://docs.djangoproject.com/en/4.2/ref/models/instances/#creating-objects
+
+
+
+NOTES:
+features of template language:
+    {% if show_meetups %}
+    <!-- dots used in django template language, not standard python -->
+        {% for meetup_item in meetups %}
+            <p>{{ meetup_item.title }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No meetups found!</p>
+    {% endif %}
