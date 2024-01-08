@@ -1,0 +1,5 @@
+db.sqlite3
+valuation_app/stock_tracker_fmp.py
+valuation_app/stock_tracker_av.py
+valuation_app/credentials.py
+stock_tracker_fmp.py
