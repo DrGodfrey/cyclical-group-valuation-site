@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -191,3 +192,39 @@ class CircularOwnership_model:
     company_1_outside_ownership = models.FloatField(blank=True, null=True)
     company_2 = models.ManyToManyField(Company_model, blank=True, null=True)
     company_2_outside_ownership = models.FloatField(blank=True, null=True)
+    
+
+"""
+Currently working on using the database to store recent stock prices from AV API
+to avoid excessive call requests on a non-premium licence.
+"""
+
+#Dummy code: source="https://www.codetrade.io/blog/insert-multiple-list-in-database-using-python-django/"
+
+class StockQuote(models.Model):
+    ticker_symbol = models.CharField(max_length=200, blank=True, null=True, unique=False)
+    share_price = models.FloatField(blank=True, null=True)
+    time_of_access = models.DateTimeField(auto_now_add=True)
+    # "https://www.geeksforgeeks.org/timefield-django-models/"
+    # Django documentation - "https://docs.djangoproject.com/en/dev/ref/models/querysets/#bulk-create"
+
+list_of_stock_quotes = [
+    StockQuote(ticker_symbol="BOL.PA", share_price=5.8),
+    StockQuote(ticker_symbol="UMG.AMS", share_price=25),
+    StockQuote(ticker_symbol="ODET.PA", share_price=1420),
+    StockQuote(ticker_symbol="VIV.PA", share_price=9.8)
+]
+
+StockQuote.objects.bulk_create(list_of_stock_quotes)
+
+for stock_quote in StockQuote.objects.filter(ticker_symbol="BOL.PA"):
+    if ((now() - stock_quote.time_of_access).total_seconds() < 300):
+        print(stock_quote.ticker_symbol, stock_quote.share_price, (now() - stock_quote.time_of_access).total_seconds())
+
+
+print("---------------------------------")
+# print("datetime", datetime.datetime.now())
+# print(datetime.datetime.now())
+
+
+# Currently creates a new entry every time. Next step, find if there's an entry with the same ticker name, if so replace it - https://docs.djangoproject.com/en/3.0/ref/models/instances/#explicitly-specifying-auto-primary-key-values
