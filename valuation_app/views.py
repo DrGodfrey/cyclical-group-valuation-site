@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Company, CircularOwnership, Company_model
+from .models import Company, CircularOwnership, Company_model, retrieve_price_or_update
 from .stock_tracker_av import *
 
 
@@ -10,19 +10,12 @@ from .stock_tracker_av import *
 
 # USES ALPHAVANTAGE API TO FETCH UP TO DATE SHAREPRICES:
 
-# conditionally gated to allow site to be loaded even if access limit on API reached (nescessary for maintenance)
-use_alpha_vantage=True
+bollore_shareprice = retrieve_price_or_update(ticker='BOL.PA')
+umg_shareprice = retrieve_price_or_update(ticker='UMG.AMS')
+odet_shareprice = retrieve_price_or_update(ticker='ODET.PA')
+vivendi_shareprice = retrieve_price_or_update(ticker='VIV.PA')
 
-if use_alpha_vantage:
-    bollore_shareprice = find_price_of(ticker='BOL.PA')
-    umg_shareprice = find_price_of(ticker='UMG.AMS')
-    odet_shareprice = find_price_of(ticker='ODET.PA')
-    vivendi_shareprice = find_price_of(ticker='VIV.PA')
-else:
-    bollore_shareprice = 5.78
-    umg_shareprice = 25.17
-    odet_shareprice = 1420
-    vivendi_shareprice = 9.84
+
 
 # Bollore 'galaxy'
 bollore = Company('Bolloré SE', shares_outstanding=(2902650243 - 99.1 * 10 ** 6) , shareprice=bollore_shareprice)
