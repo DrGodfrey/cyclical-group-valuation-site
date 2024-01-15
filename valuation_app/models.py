@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.timezone import now
 
+from .stock_tracker_av import *
+
 # Create your models here.
 
 """
@@ -195,7 +197,7 @@ class CircularOwnership_model:
     
 
 """
-Currently working on using the database to store recent stock prices from AV API
+This code allows me to store recent stock prices from AV API
 to avoid excessive call requests on a non-premium licence.
 """
 
@@ -208,18 +210,18 @@ class StockQuote(models.Model):
     # "https://www.geeksforgeeks.org/timefield-django-models/"
     # Django documentation - "https://docs.djangoproject.com/en/dev/ref/models/querysets/#bulk-create"
 
-list_of_stock_quotes = [
-    StockQuote(ticker_symbol="BOL.PA", share_price=5.8),
-    StockQuote(ticker_symbol="UMG.AMS", share_price=25),
-    StockQuote(ticker_symbol="ODET.PA", share_price=1420),
-    StockQuote(ticker_symbol="VIV.PA", share_price=9.8)
-]
-
-StockQuote.objects.bulk_create(list_of_stock_quotes)
-
-for stock_quote in StockQuote.objects.filter(ticker_symbol="BOL.PA"):
-    if ((now() - stock_quote.time_of_access).total_seconds() < 300):
-        print(stock_quote.ticker_symbol, stock_quote.share_price, (now() - stock_quote.time_of_access).total_seconds())
+def retrieve_price_or_update(ticker="", maximum_stock_quote_age=2000):
+    # acts as guard clause returning shareprice if already present in database
+    for stock_quote in StockQuote.objects.filter(ticker_symbol=ticker):
+        if ((now() - stock_quote.time_of_access).total_seconds() < maximum_stock_quote_age):
+            print("from database:", stock_quote.ticker_symbol, stock_quote.share_price, "Time since last call:",(now() - stock_quote.time_of_access).total_seconds())
+            return stock_quote.share_price
+                  
+    # otherwise makes a request to API, updates database and returns shareprice
+    stock_price = find_price_of(ticker=ticker)
+    StockQuote.objects.bulk_create([StockQuote(ticker_symbol=ticker, share_price=stock_price)])
+    print("AV API CALL", now())
+    return stock_price
 
 
 print("---------------------------------")
